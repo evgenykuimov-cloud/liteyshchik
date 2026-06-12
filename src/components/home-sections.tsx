@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Building2, ClipboardCheck, Factory, FileBox, HardHat, Layers3, Ruler, Truck, Wrench } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -33,5 +32,5 @@ export function HomeSections() {
 }
 
 function InfoPanel({ icon: Icon, title, text, href }: { icon: typeof Factory; title: string; text: string; href: string }) {
-  return <article className="noise min-w-0 min-h-80 border border-[var(--border)] p-7"><Icon className="text-[var(--accent)]" size={34} /><h3 className="heading mt-16 text-4xl">{title}</h3><p className="mt-4 max-w-xl text-sm leading-6 text-[var(--foreground-muted)]">{text}</p><Link href={href} className="btn-secondary mt-6">Подробнее</Link></article>;
+  return <article className="noise min-w-0 min-h-80 border border-[var(--border)] p-7"><Icon className="text-[var(--accent)]" size={34} /><h3 className="heading mt-16 text-4xl">{title}</h3><p className="mt-4 max-w-xl text-sm leading-6 text-[var(--foreground-muted)]">{text}</p><a href={href} className="btn-secondary mt-6">Подробнее</a></article>;
 }

@@ -4,7 +4,7 @@ import { Logo } from "@/components/logo";
 
 export function Footer() {
   return (
-    <footer className="border-t border-[var(--border)] bg-[#0b0d0e] py-12">
+    <footer className="relative z-10 isolate border-t border-[var(--border)] bg-[#0b0d0e] py-12">
       <Container className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
         <div><Logo /><p className="mt-5 text-sm leading-6 text-[var(--foreground-muted)]">Корпоративный сайт-каталог промышленного чугунного литья.</p></div>
         <div><h2 className="mb-4 font-bold uppercase">Каталог</h2><div className="grid gap-2 text-sm text-[var(--foreground-muted)]"><Link href="/catalog/chugunnye-lyuki">Чугунные люки</Link><Link href="/catalog/dozhdepriemniki">Дождеприёмники</Link><Link href="/catalog/oboymy">Обоймы</Link><Link href="/catalog/komplekty">Комплекты</Link></div></div>

@@ -27,6 +27,10 @@ body {
   color: var(--foreground);
   font-family: var(--font-body), Arial, sans-serif;
 }
+main {
+  position: relative;
+  isolation: isolate;
+}
 body::before {
   content: "";
   position: fixed;
