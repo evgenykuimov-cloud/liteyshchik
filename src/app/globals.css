@@ -99,6 +99,12 @@ img { max-width: 100%; height: auto; }
     radial-gradient(circle at 70% 30%, rgba(242,183,5,.09), transparent 27%),
     linear-gradient(135deg, #1d2225, #0c0e0f 72%);
 }
+.product-hero-frame {
+  box-shadow: 0 32px 90px rgba(0, 0, 0, .35);
+  background-image:
+    linear-gradient(135deg, rgba(242, 183, 5, .025), transparent 42%),
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, .012) 0 1px, transparent 1px 7px);
+}
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
 }
