@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">Демонстрационная визуализация чугунного изделия</title>
+  <desc id="desc">Нейтральный круглый промышленный объект без маркировки</desc>
+  <defs>
+    <radialGradient id="bg"><stop stop-color="#394044"/><stop offset="1" stop-color="#111416"/></radialGradient>
+    <radialGradient id="metal"><stop stop-color="#596166"/><stop offset=".45" stop-color="#292e31"/><stop offset="1" stop-color="#0e1011"/></radialGradient>
+    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="36" height="36" fill="#282d30"/>
+      <path d="M0 18h36M18 0v36" stroke="#4d5559" stroke-width="4"/>
+    </pattern>
+    <filter id="shadow"><feDropShadow dx="18" dy="28" stdDeviation="25" flood-opacity=".65"/></filter>
+  </defs>
+  <rect width="1200" height="900" fill="url(#bg)"/>
+  <path d="M0 650 1200 380v520H0z" fill="#171a1c" opacity=".72"/>
+  <g transform="translate(600 450) rotate(-8) scale(1 .72)" filter="url(#shadow)">
+    <circle r="370" fill="#171a1c" stroke="#60686c" stroke-width="42"/>
+    <circle r="310" fill="url(#metal)" stroke="#111416" stroke-width="25"/>
+    <circle r="260" fill="url(#grid)" stroke="#70787c" stroke-width="8"/>
+    <circle r="90" fill="#22272a" stroke="#5f686c" stroke-width="10"/>
+    <path d="M-70 0h140M0-70v140" stroke="#777f83" stroke-width="16"/>
+  </g>
+  <text x="54" y="828" fill="#a8adb0" font-family="Arial, sans-serif" font-size="24">ДЕМОНСТРАЦИОННОЕ ИЗОБРАЖЕНИЕ · ЗАМЕНИТЬ ФОТОГРАФИЕЙ ПРОДУКЦИИ</text>
+</svg>

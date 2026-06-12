@@ -1,0 +1,19 @@
+node_modules
+.next
+out
+.env
+.env.local
+.vercel
+npm-debug.log*
+leads-development.jsonl
+server.log
+server-error.log
+*.tsbuildinfo
+gh-auth-*.log
+
+# Internal source materials are kept locally and excluded from the public repo.
+/ТЗ сайт ООО Литейщик.txt
+/33e05e0b-5c1b-4143-99b6-a692b40518ae.png
+/dozhdepriemnik_db_400kh800.jpg
+
+.vercel
