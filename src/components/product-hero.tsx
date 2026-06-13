@@ -19,15 +19,35 @@ export function ProductHero({
   product: Product;
   category?: Category;
 }) {
-  const keyRows = [
-    findSpec(product, "Нормативный документ"),
-    findSpec(product, "Высота"),
-    findSpec(product, "Класс нагрузки"),
-    {
-      label: "Рекомендуемые места установки",
-      value: product.application?.join(", ") || "Определяются проектом",
-    },
-  ];
+  const keyRows =
+    product.id === "demo-rect-drain"
+      ? [
+          findSpec(product, "Нормативный документ"),
+          findSpec(product, "Высота"),
+          findSpec(product, "Класс нагрузки"),
+          {
+            label: "Габариты",
+            value: `внутренний ${findSpec(product, "Внутренний размер").value}; наружный ${findSpec(product, "Наружный размер").value}`,
+          },
+          findSpec(product, "Масса комплекта"),
+          {
+            label: "Масса элементов",
+            value: `корпус ${findSpec(product, "Масса основного корпуса").value}; решётка ${findSpec(product, "Масса решётки").value}`,
+          },
+          {
+            label: "Места установки",
+            value: product.application?.join(", ") || "Определяются проектом",
+          },
+        ]
+      : [
+          findSpec(product, "Нормативный документ"),
+          findSpec(product, "Высота"),
+          findSpec(product, "Класс нагрузки"),
+          {
+            label: "Рекомендуемые места установки",
+            value: product.application?.join(", ") || "Определяются проектом",
+          },
+        ];
   const benefits = [
     {
       icon: ShieldCheck,
@@ -36,8 +56,11 @@ export function ProductHero({
     },
     {
       icon: Gauge,
-      title: "Расчётная нагрузка",
-      text: "Класс подтверждается документацией",
+      title: product.id === "demo-rect-drain" ? "Масса комплекта" : "Расчётная нагрузка",
+      text:
+        product.id === "demo-rect-drain"
+          ? findSpec(product, "Масса комплекта").value
+          : "Класс подтверждается документацией",
     },
     {
       icon: product.productType === "storm-drain" ? Droplets : PackageCheck,
