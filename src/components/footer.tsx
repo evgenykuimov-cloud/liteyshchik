@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Logo } from "@/components/logo";
+import { company } from "@/config/company";
 
 export function Footer() {
   return (
@@ -9,10 +10,19 @@ export function Footer() {
         <div><Logo /><p className="mt-5 text-sm leading-6 text-[var(--foreground-muted)]">Корпоративный сайт-каталог промышленного чугунного литья.</p></div>
         <div><h2 className="mb-4 font-bold uppercase">Каталог</h2><div className="grid gap-2 text-sm text-[var(--foreground-muted)]"><Link href="/catalog/chugunnye-lyuki">Чугунные люки</Link><Link href="/catalog/dozhdepriemniki">Дождеприёмники</Link><Link href="/catalog/oboymy">Обоймы</Link><Link href="/catalog/komplekty">Комплекты</Link></div></div>
         <div><h2 className="mb-4 font-bold uppercase">Компания</h2><div className="grid gap-2 text-sm text-[var(--foreground-muted)]"><Link href="/production">Производство</Link><Link href="/quality">Контроль качества</Link><Link href="/delivery">Доставка</Link><Link href="/projects">Поставки и объекты</Link></div></div>
-        <div><h2 className="mb-4 font-bold uppercase">Контакты</h2><p className="text-sm leading-6 text-[var(--foreground-muted)]">Контактные данные будут добавлены после подтверждения компанией.</p><Link href="/request-quote" className="mt-5 inline-block text-sm font-bold text-[var(--accent)]">Отправить запрос →</Link></div>
+        <div>
+          <h2 className="mb-4 font-bold uppercase">Контакты</h2>
+          <div className="grid gap-2 text-sm leading-6 text-[var(--foreground-muted)]">
+            <a href={company.phone.href}>{company.phone.display}</a>
+            <a href={company.officePhone.href}>{company.officePhone.display}</a>
+            <a href={company.email.href} className="break-all">{company.email.display}</a>
+            <p>{company.address}</p>
+          </div>
+          <Link href="/request-quote" className="mt-5 inline-block text-sm font-bold text-[var(--accent)]">Отправить запрос →</Link>
+        </div>
       </Container>
       <Container className="mt-10 flex flex-col gap-4 border-t border-[var(--border)] pt-6 text-xs leading-5 text-[var(--foreground-muted)] sm:flex-row sm:justify-between">
-        <span>© {new Date().getFullYear()} ООО «Литейщик»</span>
+        <span>© {new Date().getFullYear()} {company.legalName} · ИНН {company.requisites.inn}</span>
         <span className="flex flex-col gap-2 sm:flex-row sm:gap-1">
           <Link href="/privacy" className="underline decoration-[var(--border-strong)] underline-offset-4">
             Политика конфиденциальности

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Logo } from "@/components/logo";
 import { MobileNavigation } from "@/components/mobile-navigation";
 import { Container } from "@/components/ui/container";
+import { company } from "@/config/company";
 
 const links = [
   ["/production", "Производство"],
@@ -40,7 +41,10 @@ export function Header() {
           {links.map(([href, label]) => <Link key={href} href={href} className="py-7 hover:text-[var(--accent)]">{label}</Link>)}
         </nav>
         <div className="hidden items-center gap-3 xl:flex">
-          <span className="text-right text-xs text-[var(--foreground-muted)]">Контактные данные<br />будут добавлены</span>
+          <div className="text-right text-xs text-[var(--foreground-muted)]">
+            <a href={company.phone.href} className="block hover:text-white">{company.phone.display}</a>
+            <a href={company.email.href} className="block hover:text-white">{company.email.display}</a>
+          </div>
           <Link href="/request-quote" className="btn-primary">Получить КП</Link>
         </div>
         <MobileNavigation />

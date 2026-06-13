@@ -5,6 +5,7 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { RequestQuoteForm } from "@/components/request-quote-form";
 import { DocumentsSection } from "@/components/documents-section";
 import { pages } from "@/data/pages";
+import { company } from "@/config/company";
 
 const specialSlugs = ["documents", "request-quote", "privacy", "personal-data-consent"];
 export const dynamicParams = false;
@@ -37,7 +38,7 @@ export default async function InformationPage({ params }: { params: Promise<{ sl
       <h1 className="heading mt-5 max-w-6xl text-6xl sm:text-8xl lg:text-9xl">{page.title}</h1>
       <p className="mt-7 max-w-3xl text-lg leading-8 text-[var(--foreground-muted)]">{page.description}</p>
       <div className="my-14 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {page.sections.map((section, index) => <section key={section.title} className="min-h-64 border border-[var(--border)] bg-[var(--surface)] p-6"><span className="font-mono text-sm text-[var(--accent)]">0{index + 1}</span><h2 className="heading mt-10 text-3xl">{section.title}</h2><p className="mt-4 text-sm leading-6 text-[var(--foreground-muted)]">{section.text}</p>{section.items && <ul className="mt-4 grid gap-2 text-sm">{section.items.map((item) => <li key={item} className="border-l border-[var(--accent)] pl-3">{item}</li>)}</ul>}</section>)}
+        {page.sections.map((section, index) => <section key={section.title} className="min-h-64 border border-[var(--border)] bg-[var(--surface)] p-6"><span className="font-mono text-sm text-[var(--accent)]">0{index + 1}</span><h2 className="heading mt-10 text-3xl">{section.title}</h2>{section.href ? <a href={section.href} className="mt-4 block break-all text-sm leading-6 text-[var(--accent)] underline underline-offset-4">{section.text}</a> : <p className="mt-4 text-sm leading-6 text-[var(--foreground-muted)]">{section.text}</p>}{section.items && <ul className="mt-4 grid gap-2 text-sm">{section.items.map((item) => <li key={item} className="break-all border-l border-[var(--accent)] pl-3">{item}</li>)}</ul>}</section>)}
       </div>
       {showForm && <section className="border border-[var(--border)] bg-[var(--surface)] p-6 sm:p-9"><h2 className="heading mb-8 text-5xl">Отправить технический запрос</h2><RequestQuoteForm /></section>}
     </Container>
@@ -49,9 +50,9 @@ function DocumentPage() {
 }
 
 function QuotePage() {
-  return <Container className="section-shell"><Breadcrumbs items={[{ label: "Запрос КП" }]} /><div className="grid gap-10 lg:grid-cols-[.7fr_1.3fr]"><div><p className="text-sm font-bold text-[var(--accent)]">B2B-ЗАПРОС</p><h1 className="heading mt-5 text-6xl sm:text-8xl">Получить коммерческое предложение</h1><p className="mt-6 leading-7 text-[var(--foreground-muted)]">Заполните обязательные поля и приложите спецификацию. До настройки почты или CRM форма честно сообщает, что заявка не отправлена.</p></div><div className="border border-[var(--border)] bg-[var(--surface)] p-6 sm:p-9"><RequestQuoteForm /></div></div></Container>;
+  return <Container className="section-shell"><Breadcrumbs items={[{ label: "Запрос КП" }]} /><div className="grid gap-10 lg:grid-cols-[.7fr_1.3fr]"><div><p className="text-sm font-bold text-[var(--accent)]">B2B-ЗАПРОС</p><h1 className="heading mt-5 text-6xl sm:text-8xl">Получить коммерческое предложение</h1><p className="mt-6 leading-7 text-[var(--foreground-muted)]">Заполните обязательные поля и приложите спецификацию. Канал автоматической отправки формы настраивается; сейчас запрос можно направить напрямую на <a href={company.email.href} className="text-[var(--accent)] underline underline-offset-4">{company.email.display}</a> или обсудить по телефону <a href={company.phone.href} className="text-[var(--accent)] underline underline-offset-4">{company.phone.display}</a>.</p></div><div className="border border-[var(--border)] bg-[var(--surface)] p-6 sm:p-9"><RequestQuoteForm /></div></div></Container>;
 }
 
 function LegalPage({ consent }: { consent: boolean }) {
-  return <Container className="section-shell max-w-4xl"><Breadcrumbs items={[{ label: consent ? "Согласие на обработку данных" : "Политика конфиденциальности" }]} /><h1 className="heading text-5xl sm:text-7xl">{consent ? "Согласие на обработку персональных данных" : "Политика конфиденциальности"}</h1><div className="mt-8 grid gap-5 leading-7 text-[var(--foreground-muted)]"><p>Документ является редакционной заготовкой и требует юридической проверки до начала реального сбора персональных данных.</p><p>Оператор: ООО «Литейщик». Юридические реквизиты и контакт ответственного лица уточняются.</p><p>Форма предназначена для обработки запросов на продукцию. Состав, сроки хранения, правовые основания и порядок отзыва согласия должны быть утверждены компанией.</p></div></Container>;
+  return <Container className="section-shell max-w-4xl"><Breadcrumbs items={[{ label: consent ? "Согласие на обработку данных" : "Политика конфиденциальности" }]} /><h1 className="heading text-5xl sm:text-7xl">{consent ? "Согласие на обработку персональных данных" : "Политика конфиденциальности"}</h1><div className="mt-8 grid gap-5 leading-7 text-[var(--foreground-muted)]"><p>Документ является редакционной заготовкой и требует юридической проверки до начала реального сбора персональных данных.</p><p>Оператор: {company.fullLegalName}, ИНН {company.requisites.inn}, ОГРН {company.requisites.ogrn}. Адрес: {company.address}. Email: <a href={company.email.href} className="text-[var(--accent)] underline underline-offset-4">{company.email.display}</a>.</p><p>Форма предназначена для обработки запросов на продукцию. Состав, сроки хранения, правовые основания и порядок отзыва согласия должны быть утверждены компанией.</p></div></Container>;
 }

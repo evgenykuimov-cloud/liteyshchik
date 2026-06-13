@@ -1,8 +1,10 @@
+import { company } from "@/config/company";
+
 export type PageConfig = {
   title: string;
   eyebrow: string;
   description: string;
-  sections: Array<{ title: string; text: string; items?: string[] }>;
+  sections: Array<{ title: string; text: string; items?: string[]; href?: string }>;
 };
 
 export const pages: Record<string, PageConfig> = {
@@ -52,7 +54,7 @@ export const pages: Record<string, PageConfig> = {
     sections: [
       { title: "Что указать", text: "Чем полнее исходные данные, тем точнее техническая проверка.", items: ["Наименование изделия", "Количество", "Комплектность", "Требуемая дата", "Адрес доставки", "Реквизиты компании"] },
       { title: "Условия доставки", text: "Условия и география поставки уточняются для конкретного запроса." },
-      { title: "Следующий шаг", text: "После настройки канала заявка будет передана ответственному специалисту." },
+      { title: "Следующий шаг", text: `Направьте запрос через форму или напрямую на ${company.email.display}.` },
     ],
   },
   delivery: {
@@ -73,21 +75,41 @@ export const pages: Record<string, PageConfig> = {
   about: {
     title: "О компании",
     eyebrow: "ООО «ЛИТЕЙЩИК»",
-    description: "Корпоративная информация будет дополнена после подтверждения юридических и производственных сведений.",
+    description: `${company.fullLegalName}. Производственная компания зарегистрирована в г. Лабинске Краснодарского края.`,
     sections: [
       { title: "Профиль", text: "Промышленное чугунное литьё, серийные изделия и производство по техническим требованиям." },
-      { title: "Реквизиты", text: "ОГРН, ИНН, КПП и адреса пока не предоставлены." },
+      {
+        title: "Регистрационные данные",
+        text: company.address,
+        items: [
+          `ИНН ${company.requisites.inn}`,
+          `КПП ${company.requisites.kpp}`,
+          `ОГРН ${company.requisites.ogrn}`,
+          `ОКПО ${company.requisites.okpo}`,
+          `ОКОНХ ${company.requisites.okonh}`,
+          `ОКВЭД ${company.requisites.okved}`,
+        ],
+      },
+      {
+        title: "Банковские реквизиты",
+        text: `${company.requisites.bank}. ${company.requisites.bankBranch}.`,
+        items: [
+          `Р/с ${company.requisites.settlementAccount}`,
+          `К/с ${company.requisites.correspondentAccount}`,
+          `БИК ${company.requisites.bik}`,
+        ],
+      },
     ],
   },
   contacts: {
     title: "Контакты",
     eyebrow: "СВЯЗАТЬСЯ С КОМПАНИЕЙ",
-    description: "Контактные данные будут добавлены после подтверждения компанией.",
+    description: "Свяжитесь с ООО «Литейщик» по телефону или электронной почте либо отправьте технический запрос через форму.",
     sections: [
-      { title: "Телефон", text: "Уточняется" },
-      { title: "Email", text: "Уточняется" },
-      { title: "Адрес", text: "Уточняется" },
-      { title: "Часы работы", text: "Уточняется" },
+      { title: company.phone.label, text: company.phone.display, href: company.phone.href },
+      { title: company.officePhone.label, text: company.officePhone.display, href: company.officePhone.href },
+      { title: "Email", text: company.email.display, href: company.email.href },
+      { title: "Адрес", text: company.address },
     ],
   },
 };

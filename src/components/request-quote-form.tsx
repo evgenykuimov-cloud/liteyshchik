@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { FileUploader } from "@/components/file-uploader";
 import { ErrorState, SuccessMessage } from "@/components/ui/states";
+import { company, quoteEmailHref } from "@/config/company";
 
 type State = { type: "idle" | "loading" | "success" | "error"; message?: string };
 
@@ -30,6 +31,9 @@ export function RequestQuoteForm({ compact = false, productName }: { compact?: b
     <form onSubmit={submit} className="grid gap-4" noValidate>
       {state.type === "success" && <SuccessMessage message={state.message ?? "Запрос отправлен"} />}
       {state.type === "error" && <ErrorState message={state.message} />}
+      <p className="text-sm leading-6 text-[var(--foreground-muted)]">
+        Прямой канал: <a href={quoteEmailHref} className="text-[var(--accent)] underline underline-offset-4">{company.email.display}</a>
+      </p>
       <div className="grid gap-4 sm:grid-cols-2">
         <Field name="name" label="Имя" required />
         <Field name="company" label="Компания" required />

@@ -10,6 +10,22 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  const organization = { "@context": "https://schema.org", "@type": "Organization", name: company.legalName, url: company.siteUrl };
+  const organization = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: company.legalName,
+    url: company.siteUrl,
+    email: company.email.display,
+    telephone: company.phone.display,
+    taxID: company.requisites.inn,
+    address: {
+      "@type": "PostalAddress",
+      postalCode: "352500",
+      addressRegion: "Краснодарский край",
+      addressLocality: "Лабинск",
+      streetAddress: "ул. Делегатская, 40/2",
+      addressCountry: "RU",
+    },
+  };
   return <><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organization) }} /><HeroSection /><HomeSections /></>;
 }
