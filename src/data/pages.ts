@@ -4,7 +4,7 @@ export type PageConfig = {
   title: string;
   eyebrow: string;
   description: string;
-  sections: Array<{ title: string; text: string; items?: string[]; href?: string }>;
+  sections: Array<{ title: string; text: string; items?: string[]; href?: string; type?: "map" }>;
 };
 
 export const pages: Record<string, PageConfig> = {
@@ -109,7 +109,7 @@ export const pages: Record<string, PageConfig> = {
       { title: company.phone.label, text: company.phone.display, href: company.phone.href },
       { title: company.officePhone.label, text: company.officePhone.display, href: company.officePhone.href },
       { title: "Email", text: company.email.display, href: company.email.href },
-      { title: "Адрес", text: company.address },
+      { title: "Адрес", text: company.address, type: "map" },
     ],
   },
 };

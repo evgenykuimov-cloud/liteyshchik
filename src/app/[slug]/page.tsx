@@ -5,7 +5,7 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { RequestQuoteForm } from "@/components/request-quote-form";
 import { DocumentsSection } from "@/components/documents-section";
 import { pages } from "@/data/pages";
-import { company } from "@/config/company";
+import { company, yandexMapEmbedHref, yandexMapHref } from "@/config/company";
 
 const specialSlugs = ["documents", "request-quote", "privacy", "personal-data-consent"];
 export const dynamicParams = false;
@@ -38,7 +38,25 @@ export default async function InformationPage({ params }: { params: Promise<{ sl
       <h1 className="heading mt-5 max-w-6xl text-6xl sm:text-8xl lg:text-9xl">{page.title}</h1>
       <p className="mt-7 max-w-3xl text-lg leading-8 text-[var(--foreground-muted)]">{page.description}</p>
       <div className="my-14 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {page.sections.map((section, index) => <section key={section.title} className="min-h-64 border border-[var(--border)] bg-[var(--surface)] p-6"><span className="font-mono text-sm text-[var(--accent)]">0{index + 1}</span><h2 className="heading mt-10 text-3xl">{section.title}</h2>{section.href ? <a href={section.href} className="mt-4 block break-all text-sm leading-6 text-[var(--accent)] underline underline-offset-4">{section.text}</a> : <p className="mt-4 text-sm leading-6 text-[var(--foreground-muted)]">{section.text}</p>}{section.items && <ul className="mt-4 grid gap-2 text-sm">{section.items.map((item) => <li key={item} className="break-all border-l border-[var(--accent)] pl-3">{item}</li>)}</ul>}</section>)}
+        {page.sections.map((section, index) => section.type === "map" ? (
+          <section key={section.title} className="overflow-hidden border border-[var(--border)] bg-[var(--surface)] md:col-span-2 lg:col-span-3">
+            <div className="p-6">
+              <span className="font-mono text-sm text-[var(--accent)]">0{index + 1}</span>
+              <h2 className="heading mt-6 text-3xl">{section.title}</h2>
+              <p className="mt-3 text-sm leading-6 text-[var(--foreground-muted)]">{section.text}</p>
+              <a href={yandexMapHref} target="_blank" rel="noreferrer" className="mt-4 inline-block text-sm font-bold text-[var(--accent)] underline underline-offset-4">Открыть в Яндекс Картах →</a>
+            </div>
+            <iframe
+              src={yandexMapEmbedHref}
+              title={`Яндекс Карта: ${section.text}`}
+              loading="lazy"
+              allowFullScreen
+              className="h-[360px] w-full border-0 sm:h-[440px]"
+            />
+          </section>
+        ) : (
+          <section key={section.title} className="min-h-64 border border-[var(--border)] bg-[var(--surface)] p-6"><span className="font-mono text-sm text-[var(--accent)]">0{index + 1}</span><h2 className="heading mt-10 text-3xl">{section.title}</h2>{section.href ? <a href={section.href} className="mt-4 block break-all text-sm leading-6 text-[var(--accent)] underline underline-offset-4">{section.text}</a> : <p className="mt-4 text-sm leading-6 text-[var(--foreground-muted)]">{section.text}</p>}{section.items && <ul className="mt-4 grid gap-2 text-sm">{section.items.map((item) => <li key={item} className="break-all border-l border-[var(--accent)] pl-3">{item}</li>)}</ul>}</section>
+        ))}
       </div>
       {showForm && <section className="border border-[var(--border)] bg-[var(--surface)] p-6 sm:p-9"><h2 className="heading mb-8 text-5xl">Отправить технический запрос</h2><RequestQuoteForm /></section>}
     </Container>
