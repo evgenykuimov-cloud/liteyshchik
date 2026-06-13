@@ -11,7 +11,14 @@ export function ProductCard({ product }: { product: Product }) {
       </Link>
       <div className="p-5">
         <p className="mb-2 text-[10px] font-bold uppercase tracking-[.18em] text-[var(--accent)]">Демонстрационная позиция</p>
-        <h3 className="heading text-2xl">{product.name}</h3>
+        <h3 className="heading text-2xl">
+          <Link
+            href={`/catalog/${product.categorySlug}/${product.slug}`}
+            className="transition-colors hover:text-[var(--accent)] focus-visible:text-[var(--accent)] focus-visible:outline-none"
+          >
+            {product.name}
+          </Link>
+        </h3>
         <p className="mt-3 min-h-12 text-sm leading-6 text-[var(--foreground-muted)]">{product.shortDescription}</p>
         <Link href={`/catalog/${product.categorySlug}/${product.slug}`} className="mt-5 flex items-center justify-between border-t border-[var(--border)] pt-4 text-xs font-bold uppercase">
           Характеристики <ArrowUpRight size={18} />
