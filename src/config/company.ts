@@ -35,5 +35,6 @@ export const company = {
 } as const;
 
 export const quoteEmailHref = `mailto:${company.email.display}?subject=${encodeURIComponent("Запрос цены / коммерческого предложения")}`;
-export const yandexMapHref = `https://yandex.ru/maps/?text=${encodeURIComponent(company.address)}`;
-export const yandexMapEmbedHref = `https://yandex.ru/map-widget/v1/?mode=search&text=${encodeURIComponent(company.address)}&z=16`;
+const mapCoordinates = "40.720246,44.647470";
+export const yandexMapHref = `https://yandex.ru/maps/?ll=${mapCoordinates}&mode=whatshere&whatshere[point]=${mapCoordinates}&whatshere[zoom]=17&z=17`;
+export const yandexMapEmbedHref = `https://yandex.ru/map-widget/v1/?ll=${mapCoordinates}&mode=whatshere&whatshere[point]=${mapCoordinates}&whatshere[zoom]=17&z=17`;
