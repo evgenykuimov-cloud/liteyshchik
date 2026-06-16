@@ -1,16 +1,18 @@
+import Image from "next/image";
 import Link from "next/link";
+import { company } from "@/config/company";
 
 export function Logo() {
   return (
-    <Link href="/" className="flex items-center gap-3" aria-label="ООО Литейщик, главная">
-      <svg width="34" height="42" viewBox="0 0 34 42" aria-hidden="true" className="shrink-0">
-        <path d="M2 2h30v38H2z" fill="none" stroke="currentColor" strokeWidth="2" />
-        <path d="M9 9h16v5h-5v19h-6V14H9z" fill="var(--accent)" />
-      </svg>
-      <span>
-        <strong className="heading block text-xl leading-none">Литейщик</strong>
-        <span className="mt-1 block text-[9px] uppercase tracking-[.13em] text-[var(--foreground-muted)]">Промышленное чугунное литьё</span>
-      </span>
+    <Link href="/" className="flex min-w-0 items-center gap-3" aria-label={`${company.legalName}, главная`}>
+      <Image
+        src="/images/kamalit-logo.png"
+        alt="Камский Литейный Завод"
+        width={286}
+        height={78}
+        priority
+        className="h-12 w-auto max-w-[230px] object-contain sm:h-14 sm:max-w-[286px]"
+      />
     </Link>
   );
 }

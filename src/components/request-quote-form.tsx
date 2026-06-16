@@ -23,37 +23,50 @@ export function RequestQuoteForm({ compact = false, productName }: { compact?: b
       setState({ type: result.ok ? "success" : "error", message: result.message });
       if (result.ok) event.currentTarget.reset();
     } catch {
-      setState({ type: "error", message: "Сервис временно недоступен. Данные не были отправлены." });
+      setState({ type: "error", message: "TODO: подключить API/CRM/email. Сейчас заявку можно отправить напрямую на info@kamalit.ru." });
     }
   }
 
   return (
     <form onSubmit={submit} className="grid gap-4" noValidate>
-      {state.type === "success" && <SuccessMessage message={state.message ?? "Запрос отправлен"} />}
+      {state.type === "success" && <SuccessMessage message={state.message ?? "Заявка отправлена. Специалист свяжется с вами для уточнения параметров изделия."} />}
       {state.type === "error" && <ErrorState message={state.message} />}
-      <p className="text-sm leading-6 text-[var(--foreground-muted)]">
-        Прямой канал: <a href={quoteEmailHref} className="text-[var(--accent)] underline underline-offset-4">{company.email.display}</a>
-      </p>
+      <div>
+        <h2 className="heading text-4xl">{compact ? "Отправьте чертёж на расчёт" : "Отправьте чертёж на расчёт"}</h2>
+        <p className="mt-3 text-sm leading-6 text-[var(--foreground-muted)]">
+          Инженер изучит задачу, уточнит технические параметры и подготовит предложение по изготовлению.
+          Прямой канал: <a href={quoteEmailHref} className="ml-1 text-[var(--accent)] underline underline-offset-4">{company.email.display}</a>
+        </p>
+      </div>
       <div className="grid gap-4 sm:grid-cols-2">
         <Field name="name" label="Имя" required />
         <Field name="company" label="Компания" required />
-        <Field name="contact" label="Телефон или email" required />
-        <label className="grid gap-2 text-sm">Тип продукции<select name="productType" required className="field" defaultValue={productName ?? ""}><option value="" disabled>Выберите</option><option>Чугунный люк</option><option>Дождеприёмник</option><option>Обойма</option><option>Крышка</option><option>Решётка</option><option>Комплект</option><option>Изделие по чертежу</option></select></label>
+        <Field name="phone" label="Телефон" required />
+        <Field name="email" label="Email" required type="email" />
+        <Field name="productType" label="Тип изделия" required defaultValue={productName} />
         <Field name="quantity" label="Количество" required />
-        <label className="grid gap-2 text-sm">Комплектность<select name="completeness" required className="field" defaultValue=""><option value="" disabled>Выберите</option><option>Крышка или решётка + обойма</option><option>Крышка или решётка отдельно</option><option>Обойма отдельно</option></select></label>
-        <Field name="delivery" label="Регион или адрес доставки" required />
-        <Field name="inn" label="ИНН" />
+        <Field name="material" label="Марка стали / материал" />
+        <Field name="dimensions" label="Размеры" />
       </div>
-      {!compact && <div className="grid gap-4 sm:grid-cols-2"><Field name="requiredDate" label="Требуемая дата поставки" /><Field name="project" label="Проект" /><Field name="loadClass" label="Класс нагрузки" /><Field name="dimensions" label="Размеры" /><Field name="productName" label="Изделие" defaultValue={productName} /></div>}
-      <label className="grid gap-2 text-sm">Комментарий<textarea name="comment" required rows={4} className="field" placeholder="Опишите задачу и технические требования" /></label>
-      {!compact && <FileUploader onChange={setFiles} />}
+      {!compact && (
+        <div className="grid gap-4 sm:grid-cols-2">
+          <Field name="temperature" label="Температурный режим" />
+          <Field name="environment" label="Среда эксплуатации" />
+          <Field name="machining" label="Требования к мехобработке" />
+          <Field name="quality" label="Требования к контролю качества" />
+          <Field name="deadline" label="Желаемый срок поставки" />
+          <Field name="inn" label="ИНН компании" />
+        </div>
+      )}
+      <label className="grid gap-2 text-sm">Комментарий<textarea name="comment" required rows={4} className="field" placeholder="Опишите изделие, условия работы, материал, количество и требования к партии" /></label>
+      <FileUploader onChange={setFiles} />
       <label className="hidden">Веб-сайт<input name="website" tabIndex={-1} autoComplete="off" /></label>
       <label className="flex items-start gap-3 text-xs leading-5 text-[var(--foreground-muted)]"><input type="checkbox" name="consent" value="true" required className="mt-1 size-4 accent-[var(--accent)]" /><span>Согласен на обработку персональных данных в соответствии с <Link href="/privacy" className="underline">политикой конфиденциальности</Link>.</span></label>
-      <button disabled={state.type === "loading"} className="btn-primary w-full disabled:opacity-60">{state.type === "loading" ? "Проверка данных…" : "Отправить запрос"}</button>
+      <button disabled={state.type === "loading"} className="btn-primary w-full disabled:opacity-60">{state.type === "loading" ? "Проверка данных…" : "Отправить заявку"}</button>
     </form>
   );
 }
 
-function Field({ name, label, required = false, defaultValue }: { name: string; label: string; required?: boolean; defaultValue?: string }) {
-  return <label className="grid gap-2 text-sm">{label}<input name={name} required={required} defaultValue={defaultValue} className="field" /></label>;
+function Field({ name, label, required = false, defaultValue, type = "text" }: { name: string; label: string; required?: boolean; defaultValue?: string; type?: string }) {
+  return <label className="grid gap-2 text-sm">{label}<input name={name} type={type} required={required} defaultValue={defaultValue} className="field" /></label>;
 }

@@ -25,7 +25,7 @@ export async function POST(request: Request) {
       }
     }
 
-    const fingerprint = `${ip}:${parsed.data.contact}:${parsed.data.company}`;
+    const fingerprint = `${ip}:${parsed.data.phone}:${parsed.data.email}:${parsed.data.company}`;
     const last = seen.get(fingerprint) ?? 0;
     if (Date.now() - last < 30_000) return NextResponse.json({ ok: false, message: "Повторная отправка заблокирована. Подождите 30 секунд." }, { status: 409 });
     seen.set(fingerprint, Date.now());
@@ -34,7 +34,7 @@ export async function POST(request: Request) {
       return NextResponse.json({
         ok: false,
         configured: false,
-        message: "Канал доставки заявок ещё не настроен. Данные проверены, но заявка не отправлена.",
+        message: "TODO: подключить отправку заявки в CRM или на email. Данные проверены, но заявка пока не отправлена.",
       }, { status: 503 });
     }
 

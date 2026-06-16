@@ -1,12 +1,10 @@
-export type LoadClass = "A15" | "B125" | "C250" | "D400" | "E600" | "F900";
 export type ProductType =
-  | "manhole"
-  | "storm-drain"
-  | "frame"
-  | "cover"
-  | "grate"
-  | "set"
-  | "component";
+  | "heat-resistant-casting"
+  | "centrifugal-casting"
+  | "furnace-equipment"
+  | "machined-part"
+  | "conveyor-part"
+  | "custom-part";
 
 export type ProductImage = { src: string; alt: string };
 export type ProductSpecification = {
@@ -37,24 +35,23 @@ export type Product = {
   shortName?: string;
   sku?: string;
   status: "draft" | "published";
-  shape?: "round" | "rectangular" | "other";
   productType: ProductType;
   shortDescription: string;
   description: string;
-  application?: string[];
+  application: string[];
   images: ProductImage[];
   specifications: ProductSpecification[];
   variants?: ProductVariant[];
   completeness: CompletenessOption[];
-  loadClasses?: LoadClass[];
-  materials?: string[];
-  coating?: string;
+  materials: string[];
   standards?: string[];
   documents?: ProductDocument[];
   drawings?: ProductDocument[];
   relatedProductIds?: string[];
   customProductionAvailable: boolean;
   featured?: boolean;
+  calculationCta?: string;
+  faq?: Array<{ question: string; answer: string }>;
   seo: { title: string; description: string };
 };
 

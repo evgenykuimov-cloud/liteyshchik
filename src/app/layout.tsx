@@ -11,8 +11,8 @@ const headingFont = Roboto_Condensed({ subsets: ["cyrillic", "latin"], variable:
 
 export const metadata: Metadata = {
   metadataBase: new URL(company.siteUrl),
-  title: { default: "ООО «Литейщик» — промышленное чугунное литьё", template: "%s | ООО «Литейщик»" },
-  description: "Чугунные люки, дождеприёмники, решётки, крышки, обоймы и изготовление по чертежам.",
+  title: { default: "Камский Литейный Завод — жаропрочное литьё и механическая обработка металла", template: "%s | Камский Литейный Завод" },
+  description: "Производство жаропрочных отливок, реторт, муфелей, радиантных труб, валков, роликов, печных плит и центробежнолитых труб по чертежам заказчика.",
   openGraph: { type: "website", locale: "ru_RU", siteName: company.legalName },
   twitter: { card: "summary_large_image" },
 };

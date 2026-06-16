@@ -1,23 +1,34 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
-  <title id="title">Демонстрационная визуализация чугунного изделия</title>
-  <desc id="desc">Нейтральный круглый промышленный объект без маркировки</desc>
+  <title id="title">Типовая визуализация промышленной отливки</title>
+  <desc id="desc">Нейтральная промышленная металлическая деталь на тёмном фоне</desc>
   <defs>
-    <radialGradient id="bg"><stop stop-color="#394044"/><stop offset="1" stop-color="#111416"/></radialGradient>
-    <radialGradient id="metal"><stop stop-color="#596166"/><stop offset=".45" stop-color="#292e31"/><stop offset="1" stop-color="#0e1011"/></radialGradient>
-    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-      <rect width="36" height="36" fill="#282d30"/>
-      <path d="M0 18h36M18 0v36" stroke="#4d5559" stroke-width="4"/>
-    </pattern>
-    <filter id="shadow"><feDropShadow dx="18" dy="28" stdDeviation="25" flood-opacity=".65"/></filter>
+    <radialGradient id="bg" cx="45%" cy="35%" r="70%">
+      <stop stop-color="#343a3d"/>
+      <stop offset="1" stop-color="#101315"/>
+    </radialGradient>
+    <linearGradient id="metal" x1="0" x2="1" y1="0" y2="1">
+      <stop stop-color="#7b8286"/>
+      <stop offset=".35" stop-color="#3b4144"/>
+      <stop offset=".7" stop-color="#171a1c"/>
+      <stop offset="1" stop-color="#596064"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="0" x2="1">
+      <stop stop-color="#f3a000"/>
+      <stop offset="1" stop-color="#8a5a00"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="24" dy="34" stdDeviation="26" flood-opacity=".65"/>
+    </filter>
   </defs>
   <rect width="1200" height="900" fill="url(#bg)"/>
-  <path d="M0 650 1200 380v520H0z" fill="#171a1c" opacity=".72"/>
-  <g transform="translate(600 450) rotate(-8) scale(1 .72)" filter="url(#shadow)">
-    <circle r="370" fill="#171a1c" stroke="#60686c" stroke-width="42"/>
-    <circle r="310" fill="url(#metal)" stroke="#111416" stroke-width="25"/>
-    <circle r="260" fill="url(#grid)" stroke="#70787c" stroke-width="8"/>
-    <circle r="90" fill="#22272a" stroke="#5f686c" stroke-width="10"/>
-    <path d="M-70 0h140M0-70v140" stroke="#777f83" stroke-width="16"/>
+  <path d="M80 130h1040l-56 640H136z" fill="#121619" opacity=".72"/>
+  <g transform="translate(600 430) rotate(-10)" filter="url(#shadow)">
+    <path d="M-330-170h660l72 220-72 220h-660l-72-220z" fill="url(#metal)" stroke="#8c9498" stroke-width="18"/>
+    <path d="M-245-95h490l38 145-38 145h-490l-38-145z" fill="#111416" stroke="#5e666a" stroke-width="16"/>
+    <path d="M-170-45h340M-170 35h340M-170 115h340" stroke="#767f83" stroke-width="34" stroke-linecap="round"/>
+    <path d="M-255-200 255 300M255-200-255 300" stroke="#f3a000" stroke-width="4" opacity=".32"/>
   </g>
-  <text x="54" y="828" fill="#a8adb0" font-family="Arial, sans-serif" font-size="24">ДЕМОНСТРАЦИОННОЕ ИЗОБРАЖЕНИЕ · ЗАМЕНИТЬ ФОТОГРАФИЕЙ ПРОДУКЦИИ</text>
+  <path d="M88 112h760" stroke="url(#edge)" stroke-width="3"/>
+  <path d="M88 112 44 152M848 112l44 40" stroke="#f3a000" stroke-width="3"/>
+  <text x="54" y="828" fill="#a8adb0" font-family="Arial, sans-serif" font-size="24">ТИПОВОЕ ИЗОБРАЖЕНИЕ · TODO: ЗАМЕНИТЬ ФОТОГРАФИЕЙ ПРОДУКЦИИ</text>
 </svg>

@@ -2,15 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
-  Droplets,
   Factory,
-  FileClock,
-  Gauge,
+  FileText,
+  Hammer,
   PackageCheck,
   ShieldCheck,
   Wrench,
 } from "lucide-react";
 import type { Category, Product } from "@/types/catalog";
+import { company, quoteEmailHref } from "@/config/company";
 
 export function ProductHero({
   product,
@@ -19,61 +19,33 @@ export function ProductHero({
   product: Product;
   category?: Category;
 }) {
-  const keyRows =
-    product.id === "demo-rect-drain"
-      ? [
-          findSpec(product, "Нормативный документ"),
-          findSpec(product, "Высота"),
-          findSpec(product, "Класс нагрузки"),
-          {
-            label: "Габариты",
-            value: `внутренний ${findSpec(product, "Внутренний размер").value}; наружный ${findSpec(product, "Наружный размер").value}`,
-          },
-          findSpec(product, "Масса комплекта"),
-          {
-            label: "Масса элементов",
-            value: `корпус ${findSpec(product, "Масса основного корпуса").value}; решётка ${findSpec(product, "Масса решётки").value}`,
-          },
-          {
-            label: "Места установки",
-            value: product.application?.join(", ") || "Определяются проектом",
-          },
-        ]
-      : [
-          findSpec(product, "Нормативный документ"),
-          findSpec(product, "Высота"),
-          findSpec(product, "Класс нагрузки"),
-          {
-            label: "Рекомендуемые места установки",
-            value: product.application?.join(", ") || "Определяются проектом",
-          },
-        ];
+  const keyRows = [
+    { label: "Производство", value: "литьё по чертежам, эскизам и техническим требованиям заказчика" },
+    { label: "Материалы", value: product.materials.join(", ") },
+    { label: "Назначение", value: product.application.join(", ") || "по проекту заказчика" },
+    findSpec(product, "Мехобработка"),
+    findSpec(product, "Контроль качества"),
+  ];
   const benefits = [
     {
       icon: ShieldCheck,
-      title: "Комплектность",
-      text: product.completeness[0]?.description ?? "Уточняется при запросе",
-    },
-    {
-      icon: Gauge,
-      title: product.id === "demo-rect-drain" ? "Масса комплекта" : "Расчётная нагрузка",
-      text:
-        product.id === "demo-rect-drain"
-          ? findSpec(product, "Масса комплекта").value
-          : "Класс подтверждается документацией",
-    },
-    {
-      icon: product.productType === "storm-drain" ? Droplets : PackageCheck,
-      title: product.productType === "storm-drain" ? "Водоотведение" : "Назначение",
-      text:
-        product.productType === "storm-drain"
-          ? "Открытая решётчатая конструкция"
-          : "Применимость определяется проектом",
+      title: "По чертежам",
+      text: "Изготовление по КД, эскизу, образцу или техническому заданию.",
     },
     {
       icon: Factory,
-      title: "Серийное производство",
-      text: "Параметры партии уточняются при запросе",
+      title: "Собственное литьё",
+      text: "Отливки для печного, термического и машиностроительного оборудования.",
+    },
+    {
+      icon: Hammer,
+      title: "Мехобработка",
+      text: "Размеры, посадки и обработка согласуются по рабочей документации.",
+    },
+    {
+      icon: PackageCheck,
+      title: "Партии и единичные изделия",
+      text: "Расчёт выполняется после получения чертежа, материала и объёма.",
     },
   ];
 
@@ -87,15 +59,11 @@ export function ProductHero({
             fill
             priority
             sizes="(max-width: 1279px) 100vw, 56vw"
-            className={
-              product.id === "demo-rect-drain"
-                ? "object-cover object-center"
-                : "object-contain object-center p-8"
-            }
+            className="object-contain object-center p-8"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-black/10" />
           <p className="absolute bottom-5 left-5 border-l-2 border-[var(--accent)] bg-black/65 px-4 py-3 text-[10px] uppercase tracking-[.14em] text-white/70 backdrop-blur-sm">
-            Фотография предоставленного образца
+            Изображение типовое. TODO: заменить фактической фотографией изделия
           </p>
         </div>
 
@@ -110,25 +78,16 @@ export function ProductHero({
                 <p className="text-xs font-bold uppercase tracking-[.2em] text-[var(--foreground-muted)]">
                   {category?.name}
                 </p>
-                <p className="mt-1 text-sm font-bold">ООО «Литейщик»</p>
+                <p className="mt-1 text-sm font-bold">{company.legalName}</p>
               </div>
             </div>
 
             <div className="mb-10 h-px bg-gradient-to-r from-[var(--accent)] via-[var(--accent-dark)] to-transparent" />
             <h1 className="heading max-w-3xl text-5xl [overflow-wrap:normal] sm:text-6xl xl:text-[4.35rem]">
-              {product.id === "demo-rect-drain" ? (
-                <>
-                  <span className="block">Дождеприёмник</span>
-                  <span className="block">ДБ 400/800</span>
-                </>
-              ) : (
-                product.name
-              )}
+              {product.name}
             </h1>
             <p className="mt-4 text-xl text-[var(--accent)]">
-              {product.productType === "storm-drain"
-                ? "Чугунное литьё для водоотведения"
-                : product.shortDescription}
+              {product.shortDescription}
             </p>
 
             <div className="mt-14 flex items-center gap-3">
@@ -164,17 +123,20 @@ export function ProductHero({
               >
                 <span className="flex items-center gap-3">
                   <PackageCheck />
-                  Запросить цену
+                  {product.calculationCta ?? "Отправить чертёж на расчёт"}
                 </span>
                 <ArrowRight />
               </Link>
-              <div className="flex min-h-16 items-center justify-between border border-[var(--accent-dark)] px-6 text-[var(--foreground-muted)]">
+              <Link
+                href={quoteEmailHref}
+                className="flex min-h-16 items-center justify-between border border-[var(--accent-dark)] px-6 text-[var(--foreground-muted)] transition hover:border-[var(--accent)] hover:text-white"
+              >
                 <span className="flex items-center gap-3">
-                  <FileClock className="text-[var(--accent)]" />
-                  Карточка изделия готовится
+                  <FileText className="text-[var(--accent)]" />
+                  Получить консультацию инженера
                 </span>
-                <span className="text-xs uppercase">Нет файла</span>
-              </div>
+                <ArrowRight />
+              </Link>
             </div>
           </div>
         </div>

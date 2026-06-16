@@ -14,5 +14,5 @@ export type AnalyticsEvent =
 
 export function trackEvent(event: AnalyticsEvent, payload: Record<string, string | number | boolean> = {}) {
   if (typeof window === "undefined") return;
-  window.dispatchEvent(new CustomEvent("liteyshchik:analytics", { detail: { event, payload } }));
+  window.dispatchEvent(new CustomEvent("kamalit:analytics", { detail: { event, payload } }));
 }

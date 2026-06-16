@@ -4,8 +4,8 @@ import { HomeSections } from "@/components/home-sections";
 import { company } from "@/config/company";
 
 export const metadata: Metadata = {
-  title: "Чугунные люки и дождеприёмники от производителя — ООО «Литейщик»",
-  description: "Производство круглых и прямоугольных чугунных люков, дождеприёмников, решёток, крышек и обойм. Серийные изделия и изготовление по чертежам. Запросите расчёт и коммерческое предложение.",
+  title: "Камский Литейный Завод — жаропрочное литьё и механическая обработка металла",
+  description: "Производство жаропрочных отливок, реторт, муфелей, радиантных труб, валков, роликов, печных плит и центробежнолитых труб по чертежам заказчика.",
   alternates: { canonical: "/" },
 };
 
@@ -20,10 +20,10 @@ export default function HomePage() {
     taxID: company.requisites.inn,
     address: {
       "@type": "PostalAddress",
-      postalCode: "352500",
-      addressRegion: "Краснодарский край",
-      addressLocality: "Лабинск",
-      streetAddress: "ул. Делегатская, 40/2",
+      postalCode: "423832",
+      addressRegion: "Республика Татарстан",
+      addressLocality: "Набережные Челны",
+      streetAddress: "Ремонтный проезд, 7",
       addressCountry: "RU",
     },
   };

@@ -1,40 +1,47 @@
 export const company = {
-  legalName: "ООО «Литейщик»",
-  fullLegalName: "Общество с ограниченной ответственностью «Литейщик»",
-  brandName: "ЛИТЕЙЩИК",
-  descriptor: "Промышленное чугунное литьё",
+  legalName: "ООО «Камский Литейный Завод»",
+  fullLegalName: "Общество с ограниченной ответственностью «Камский Литейный Завод»",
+  brandName: "Камский Литейный Завод",
+  descriptor: "литьё и механическая обработка металла",
+  slogan: "Жаропрочное литьё и механическая обработка металла по чертежам заказчика",
   phone: {
-    display: "+7 (918) 456-59-94",
-    href: "tel:+79184565994",
-    label: "Директор",
+    display: "+7 (8552) 200-164",
+    href: "tel:+78552200164",
+    label: "Отдел продаж",
   },
-  officePhone: {
-    display: "+7 (86169) 7-36-65",
-    href: "tel:+78616973665",
-    label: "Телефон/факс",
-  },
+  additionalPhones: [
+    { display: "+7 (937) 591-14-55", href: "tel:+79375911455" },
+    { display: "+7 (927) 470-02-81", href: "tel:+79274700281" },
+    { display: "+7 (937) 281-80-85", href: "tel:+79372818085" },
+    { display: "+7 (927) 490-68-34", href: "tel:+79274906834" },
+  ],
+  fax: "+7 (8552) 200-164",
   email: {
-    display: "gimatdinowa.olga@yandex.ru",
-    href: "mailto:gimatdinowa.olga@yandex.ru",
+    display: "info@kamalit.ru",
+    href: "mailto:info@kamalit.ru",
   },
-  address: "352500, Краснодарский край, г. Лабинск, ул. Делегатская, 40/2",
+  legalAddress: "423832, РФ, Республика Татарстан, г. Набережные Челны, пр. Раиса Беляева, 90, оф. 99",
+  productionAddress: "423832, РФ, Республика Татарстан, г. Набережные Челны, Ремонтный проезд, 7",
+  workingHours: "TODO: проверить режим работы",
   requisites: {
-    inn: "2314013269",
-    kpp: "231401001",
-    ogrn: "1022302349190",
-    okpo: "48436221",
-    okonh: "12180",
-    okved: "37.10.1, 51.70",
-    settlementAccount: "40702810430290100665",
-    correspondentAccount: "30101810100000000602",
-    bik: "040349602",
-    bank: "Сбербанк России, Краснодарское отделение 8619, г. Краснодар",
-    bankBranch: "Лабинское отделение (на правах отдела), г. Лабинск",
+    inn: "1650294663",
+    kpp: "165001001",
+    ogrn: "1141650018542",
+    okpo: "70894631",
+    okato: "92430000000",
+    okved: "27.21; 27.51; 37.10; 28.52",
+    settlementAccount: "40702810929140000780",
+    correspondentAccount: "30101810200000000824",
+    bik: "042202824",
+    bank: "АО «АЛЬФА-БАНК» г. Нижний Новгород",
+    bankBranch: "Филиал «Нижегородский» АО «АЛЬФА-БАНК» г. Нижний Новгород",
+    taxOffice: "ИФНС по г. Набережные Челны Республики Татарстан",
+    registrationDate: "10.10.2014",
+    director: "Поляков Роман Владимирович",
   },
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "https://manhole-ruddy.vercel.app",
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "https://kamalit.ru",
 } as const;
 
-export const quoteEmailHref = `mailto:${company.email.display}?subject=${encodeURIComponent("Запрос цены / коммерческого предложения")}`;
-const mapCoordinates = "40.720246,44.647470";
-export const yandexMapHref = `https://yandex.ru/maps/?ll=${mapCoordinates}&mode=whatshere&whatshere[point]=${mapCoordinates}&whatshere[zoom]=17&z=17`;
-export const yandexMapEmbedHref = `https://yandex.ru/map-widget/v1/?ll=${mapCoordinates}&mode=whatshere&whatshere[point]=${mapCoordinates}&whatshere[zoom]=17&z=17`;
+export const quoteEmailHref = `mailto:${company.email.display}?subject=${encodeURIComponent("Запрос расчёта изделия по чертежу")}`;
+export const yandexMapHref = `https://yandex.ru/maps/?text=${encodeURIComponent(company.productionAddress)}`;
+export const yandexMapEmbedHref = `https://yandex.ru/map-widget/v1/?mode=search&text=${encodeURIComponent(company.productionAddress)}&z=16`;
