@@ -1,7 +1,7 @@
 import type { DocumentItem } from "@/types/catalog";
 
 export const documents: DocumentItem[] = [
-  { id: "requisites", title: "Реквизиты ООО «Камский Литейный Завод»", type: "Реквизиты", category: "Компания" },
+  { id: "requisites", title: "Реквизиты ООО «Камский Литейный Завод»", type: "Реквизиты", category: "Компания", updatedAt: "17.06.2026", href: "/documents/requisites-kamalit.pdf" },
   { id: "technical-descriptions", title: "PDF-технические описания изделий", type: "Техническое описание", category: "Продукция" },
   { id: "drawings", title: "Чертежи для проектировщиков", type: "Чертёж", category: "Проектирование" },
   { id: "cad", title: "STEP/DWG/DXF-файлы", type: "CAD", category: "Проектирование" },
