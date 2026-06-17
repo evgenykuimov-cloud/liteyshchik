@@ -22,6 +22,10 @@ export const company = {
   },
   legalAddress: "423832, РФ, Республика Татарстан, г. Набережные Челны, пр. Раиса Беляева, 90, оф. 99",
   productionAddress: "423832, РФ, Республика Татарстан, г. Набережные Челны, Ремонтный проезд, 7",
+  productionCoordinates: {
+    latitude: 55.749623,
+    longitude: 52.475725,
+  },
   workingHours: "TODO: проверить режим работы",
   requisites: {
     inn: "1650294663",
@@ -43,5 +47,6 @@ export const company = {
 } as const;
 
 export const quoteEmailHref = `mailto:${company.email.display}?subject=${encodeURIComponent("Запрос расчёта изделия по чертежу")}`;
-export const yandexMapHref = `https://yandex.ru/maps/?text=${encodeURIComponent(company.productionAddress)}`;
-export const yandexMapEmbedHref = `https://yandex.ru/map-widget/v1/?mode=search&text=${encodeURIComponent(company.productionAddress)}&z=16`;
+const productionMapPoint = `${company.productionCoordinates.longitude},${company.productionCoordinates.latitude}`;
+export const yandexMapHref = `https://yandex.ru/maps/?ll=${productionMapPoint}&z=16&pt=${productionMapPoint},pm2rdm`;
+export const yandexMapEmbedHref = `https://yandex.ru/map-widget/v1/?ll=${productionMapPoint}&z=16&l=map&pt=${productionMapPoint},pm2rdm`;
