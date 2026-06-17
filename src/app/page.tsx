@@ -3,10 +3,25 @@ import { HeroSection } from "@/components/hero-section";
 import { HomeSections } from "@/components/home-sections";
 import { company } from "@/config/company";
 
+const title = "Камский Литейный Завод — жаропрочное литьё и механическая обработка металла";
+const description = "Производство жаропрочных отливок, реторт, муфелей, радиантных труб, валков, роликов, печных плит и центробежнолитых труб по чертежам заказчика.";
+
 export const metadata: Metadata = {
-  title: "Камский Литейный Завод — жаропрочное литьё и механическая обработка металла",
-  description: "Производство жаропрочных отливок, реторт, муфелей, радиантных труб, валков, роликов, печных плит и центробежнолитых труб по чертежам заказчика.",
+  title,
+  description,
   alternates: { canonical: "/" },
+  openGraph: {
+    title,
+    description,
+    siteName: company.legalName,
+    url: "/",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
 };
 
 export default function HomePage() {

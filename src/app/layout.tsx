@@ -9,13 +9,27 @@ import { company } from "@/config/company";
 
 const bodyFont = Manrope({ subsets: ["cyrillic", "latin"], variable: "--font-body", display: "swap" });
 const headingFont = Roboto_Condensed({ subsets: ["cyrillic", "latin"], variable: "--font-heading", display: "swap", weight: ["700", "800", "900"] });
+const defaultTitle = "Камский Литейный Завод — жаропрочное литьё и механическая обработка металла";
+const defaultDescription = "Производство жаропрочных отливок, реторт, муфелей, радиантных труб, валков, роликов, печных плит и центробежнолитых труб по чертежам заказчика.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(company.siteUrl),
-  title: { default: "Камский Литейный Завод — жаропрочное литьё и механическая обработка металла", template: "%s | Камский Литейный Завод" },
-  description: "Производство жаропрочных отливок, реторт, муфелей, радиантных труб, валков, роликов, печных плит и центробежнолитых труб по чертежам заказчика.",
-  openGraph: { type: "website", locale: "ru_RU", siteName: company.legalName },
-  twitter: { card: "summary_large_image" },
+  applicationName: company.brandName,
+  title: { default: defaultTitle, template: "%s | Камский Литейный Завод" },
+  description: defaultDescription,
+  openGraph: {
+    type: "website",
+    locale: "ru_RU",
+    siteName: company.legalName,
+    title: defaultTitle,
+    description: defaultDescription,
+    url: "/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: defaultTitle,
+    description: defaultDescription,
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

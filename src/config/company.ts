@@ -43,7 +43,7 @@ export const company = {
     registrationDate: "10.10.2014",
     director: "Поляков Роман Владимирович",
   },
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "https://kamalit.ru",
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "https://manhole-ruddy.vercel.app",
 } as const;
 
 export const quoteEmailHref = `mailto:${company.email.display}?subject=${encodeURIComponent("Запрос расчёта изделия по чертежу")}`;
