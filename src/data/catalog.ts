@@ -34,20 +34,40 @@ const image = (label: string) => [
 ];
 
 const retortImages = {
-  shaft: {
-    src: "/images/products/retorta-shahtnaya.jpg",
-    alt: "Реторта/муфель для шахтных печей",
-    label: "Шахтные печи",
+  nitridingShaft: {
+    src: "/images/products/retorta-shahtnaya-azotirovanie.png",
+    alt: "Реторта/муфель для шахтных печей азотирования",
+    label: "Шахтная печь азотирования",
   },
-  tube: {
-    src: "/images/products/retorta-trubnaya.jpg",
-    alt: "Реторта/муфель для трубных и цементационных печей",
-    label: "Трубные печи",
+  inclinedTube: {
+    src: "/images/products/retorta-naklonnaya-trubnaya.png",
+    alt: "Реторта/муфель для наклонных трубных печей",
+    label: "Наклонная трубная печь",
+  },
+  carburizingShaft: {
+    src: "/images/products/retorta-shahtnaya-cementacionnaya.png",
+    alt: "Реторта/муфель для шахтных цементационных печей",
+    label: "Шахтная цементационная печь",
+  },
+  rotaryHorizontal: {
+    src: "/images/products/retorta-gorizontalnaya-vrashchayushchayasya.png",
+    alt: "Реторта/муфель для вращающейся горизонтальной печи",
+    label: "Вращающаяся горизонтальная печь",
+  },
+  endogenerator: {
+    src: "/images/products/retorta-endogenerator.png",
+    alt: "Реторта/муфель для эндогенераторов",
+    label: "Эндогенератор",
   },
   drum: {
-    src: "/images/products/retorta-barabannaya.jpg",
-    alt: "Реторта/муфель для барабанных и горизонтальных печей",
-    label: "Барабанные печи",
+    src: "/images/products/retorta-barabannaya-generated.png",
+    alt: "Реторта/муфель для барабанных печей",
+    label: "Барабанная печь",
+  },
+  vacuum: {
+    src: "/images/products/retorta-vakuumnaya-sreda.png",
+    alt: "Реторта/муфель для работы в вакуумной среде",
+    label: "Вакуумная среда",
   },
 } as const;
 
@@ -110,15 +130,23 @@ export const products: Product[] = [
       { label: "Контроль", value: "Размерный и визуальный контроль, дополнительные операции по ТЗ" },
     ],
     variants: [
-      { name: "Для шахтных печей азотирования", description: "Реторты/муфели для вертикальных печей азотирования и работы в контролируемой среде.", image: retortImages.shaft },
-      { name: "Для наклонных трубных печей", description: "Исполнение для трубных печей с наклонным расположением рабочей камеры.", image: retortImages.tube },
-      { name: "Для шахтных цементационных печей", description: "Реторты/муфели для цементации в шахтных печах Ц35, Ц60, Ц75, Ц90, Ц105 и подобных.", image: retortImages.tube },
-      { name: "Для вращающейся горизонтальной печи", description: "Исполнение для горизонтальных печей с вращением изделия или рабочей камеры.", image: retortImages.drum },
-      { name: "Для эндогенераторов", description: "Реторты/муфели для оборудования подготовки защитной газовой среды.", image: retortImages.shaft },
+      { name: "Для шахтных печей азотирования", description: "Реторты/муфели для вертикальных печей азотирования и работы в контролируемой среде.", image: retortImages.nitridingShaft },
+      { name: "Для наклонных трубных печей", description: "Исполнение для трубных печей с наклонным расположением рабочей камеры.", image: retortImages.inclinedTube },
+      { name: "Для шахтных цементационных печей", description: "Реторты/муфели для цементации в шахтных печах Ц35, Ц60, Ц75, Ц90, Ц105 и подобных.", image: retortImages.carburizingShaft },
+      { name: "Для вращающейся горизонтальной печи", description: "Исполнение для горизонтальных печей с вращением изделия или рабочей камеры.", image: retortImages.rotaryHorizontal },
+      { name: "Для эндогенераторов", description: "Реторты/муфели для оборудования подготовки защитной газовой среды.", image: retortImages.endogenerator },
       { name: "Для барабанных печей", description: "Реторты/муфели для барабанных печей и термических линий.", image: retortImages.drum },
-      { name: "Для работы в вакуумной среде", description: "Исполнение под техническое задание заказчика для вакуумной среды.", image: retortImages.tube },
+      { name: "Для работы в вакуумной среде", description: "Исполнение под техническое задание заказчика для вакуумной среды.", image: retortImages.vacuum },
     ],
-    images: [retortImages.shaft, retortImages.tube, retortImages.drum],
+    images: [
+      retortImages.nitridingShaft,
+      retortImages.inclinedTube,
+      retortImages.carburizingShaft,
+      retortImages.rotaryHorizontal,
+      retortImages.endogenerator,
+      retortImages.drum,
+      retortImages.vacuum,
+    ],
     relatedProductIds: ["furnace-plates", "loading-fixtures", "radiant-tubes"],
     calculationCta: "Отправить чертёж реторты/муфеля на расчёт",
     featured: true,
