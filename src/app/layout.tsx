@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Manrope, Roboto_Condensed } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ru" className={`${bodyFont.variable} ${headingFont.variable}`}>
-      <body><Header /><main id="main-content">{children}</main><Footer /><StickyMobileActions /></body>
+      <body><Header /><main id="main-content">{children}</main><Footer /><StickyMobileActions /><Analytics /></body>
     </html>
   );
 }
