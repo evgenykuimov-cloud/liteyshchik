@@ -10,7 +10,7 @@ import { company } from "@/config/company";
 const bodyFont = Manrope({ subsets: ["cyrillic", "latin"], variable: "--font-body", display: "swap" });
 const headingFont = Roboto_Condensed({ subsets: ["cyrillic", "latin"], variable: "--font-heading", display: "swap", weight: ["700", "800", "900"] });
 const defaultTitle = "Камский Литейный Завод — жаропрочное литьё и механическая обработка металла";
-const defaultDescription = "Производство жаропрочных отливок, реторт, муфелей, радиантных труб, валков, роликов, печных плит и центробежнолитых труб по чертежам заказчика.";
+const defaultDescription = "Производство жаропрочных отливок, реторт/муфелей, радиантных труб, валков, роликов, печных плит и центробежнолитых труб по чертежам заказчика.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(company.siteUrl),

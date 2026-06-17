@@ -6,7 +6,7 @@ export type ProductType =
   | "conveyor-part"
   | "custom-part";
 
-export type ProductImage = { src: string; alt: string };
+export type ProductImage = { src: string; alt: string; label?: string };
 export type ProductSpecification = {
   label: string;
   value: string | null;
@@ -25,6 +25,7 @@ export type ProductDocument = {
 export type ProductVariant = {
   name: string;
   description: string;
+  image?: ProductImage;
 };
 
 export type Product = {

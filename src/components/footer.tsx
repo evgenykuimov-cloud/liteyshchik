@@ -8,7 +8,7 @@ export function Footer() {
     <footer className="relative z-10 isolate border-t border-[var(--border)] bg-[#0b0d0e] pb-[calc(7rem+env(safe-area-inset-bottom))] pt-12 lg:pb-12">
       <Container className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
         <div><Logo /><p className="mt-5 text-sm leading-6 text-[var(--foreground-muted)]">Жаропрочное литьё, центробежнолитые изделия и механическая обработка металла по чертежам заказчика.</p></div>
-        <div><h2 className="mb-4 font-bold uppercase">Продукция</h2><div className="grid gap-2 text-sm text-[var(--foreground-muted)]"><Link href="/catalog/retorty">Реторты</Link><Link href="/catalog/radiantnye-truby">Радиантные трубы</Link><Link href="/catalog/centrobezhnolitye-truby">Центробежнолитые трубы</Link><Link href="/catalog/pechnaya-osnastka">Печная оснастка</Link></div></div>
+        <div><h2 className="mb-4 font-bold uppercase">Продукция</h2><div className="grid gap-2 text-sm text-[var(--foreground-muted)]"><Link href="/catalog/retorty">Реторты/Муфели</Link><Link href="/catalog/radiantnye-truby">Радиантные трубы</Link><Link href="/catalog/centrobezhnolitye-truby">Центробежнолитые трубы</Link><Link href="/catalog/pechnaya-osnastka">Печная оснастка</Link></div></div>
         <div><h2 className="mb-4 font-bold uppercase">Работа по чертежам</h2><div className="grid gap-2 text-sm text-[var(--foreground-muted)]"><Link href="/services">Услуги</Link><Link href="/custom-production">Отправить чертёж</Link><Link href="/steel-grades">Марки стали</Link><Link href="/documents">Документы</Link></div></div>
         <div>
           <h2 className="mb-4 font-bold uppercase">Контакты</h2>

@@ -1,4 +1,4 @@
-import type { Category, CompletenessOption, Product } from "@/types/catalog";
+import type { Category, CompletenessOption, Product, ProductImage } from "@/types/catalog";
 
 export const completenessOptions: CompletenessOption[] = [
   {
@@ -19,8 +19,7 @@ export const completenessOptions: CompletenessOption[] = [
 ];
 
 export const categories: Category[] = [
-  { slug: "retorty", name: "Реторты", description: "Жаропрочные реторты для шахтных, цементационных, трубных и барабанных печей." },
-  { slug: "mufeli-pechey", name: "Муфели печей", description: "Муфели и печная оснастка для термической обработки и защитных атмосфер." },
+  { slug: "retorty", name: "Реторты/Муфели", description: "Жаропрочные реторты/муфели для шахтных, цементационных, трубных, барабанных и других промышленных печей." },
   { slug: "radiantnye-truby", name: "Радиантные трубы", description: "Радиантные трубы и элементы нагревательных систем промышленных печей." },
   { slug: "centrobezhnolitye-truby", name: "Центробежнолитые трубы", description: "Центробежнолитые трубы из жаропрочных и специальных сталей по чертежам." },
   { slug: "valki-i-roliki", name: "Валки и ролики", description: "Валки, ролики и печные ролики для термических линий и рольгангов." },
@@ -33,6 +32,24 @@ export const categories: Category[] = [
 const image = (label: string) => [
   { src: "/images/product-placeholder.svg", alt: `Промышленная визуализация: ${label}. TODO: заменить реальной фотографией изделия Камского Литейного Завода` },
 ];
+
+const retortImages = {
+  shaft: {
+    src: "/images/products/retorta-shahtnaya.jpg",
+    alt: "Реторта/муфель для шахтных печей",
+    label: "Шахтные печи",
+  },
+  tube: {
+    src: "/images/products/retorta-trubnaya.jpg",
+    alt: "Реторта/муфель для трубных и цементационных печей",
+    label: "Трубные печи",
+  },
+  drum: {
+    src: "/images/products/retorta-barabannaya.jpg",
+    alt: "Реторта/муфель для барабанных и горизонтальных печей",
+    label: "Барабанные печи",
+  },
+} as const;
 
 const calcItems: CompletenessOption[] = [
   {
@@ -52,10 +69,10 @@ const calcItems: CompletenessOption[] = [
   },
 ];
 
-const product = (item: Omit<Product, "status" | "images" | "completeness" | "customProductionAvailable" | "faq">): Product => ({
+const product = (item: Omit<Product, "status" | "images" | "completeness" | "customProductionAvailable" | "faq"> & { images?: ProductImage[] }): Product => ({
   ...item,
   status: "published",
-  images: image(item.name),
+  images: item.images ?? image(item.name),
   completeness: calcItems,
   customProductionAvailable: true,
   faq: [
@@ -79,54 +96,35 @@ export const products: Product[] = [
     id: "retorts",
     slug: "retorty-dlya-promyshlennyh-pechey",
     categorySlug: "retorty",
-    name: "Реторты",
+    name: "Реторта/Муфель",
     productType: "furnace-equipment",
-    shortDescription: "Жаропрочные реторты для шахтных, цементационных, трубных, барабанных и других промышленных печей.",
-    description: "Камский Литейный Завод изготавливает реторты по чертежам заказчика для термической обработки, цементации, азотирования, нагрева и работы в защитных атмосферах.",
-    application: ["Термическая обработка", "Цементация", "Азотирование", "Печи с защитной атмосферой"],
+    shortDescription: "Жаропрочные реторты/муфели для шахтных, цементационных, трубных, барабанных и других промышленных печей.",
+    description: "Камский Литейный Завод изготавливает реторты/муфели по чертежам заказчика для термической обработки, цементации, азотирования, нагрева и работы в защитных атмосферах. Термины реторта и муфель часто используются для обозначения одинакового изделия.",
+    application: ["Термическая обработка", "Цементация", "Азотирование", "Печи с защитной атмосферой", "Вакуумная среда"],
     materials: ["Жаропрочные стали", "Специальные сплавы по условиям эксплуатации"],
     specifications: [
-      { label: "Тип изделия", value: "Реторта", important: true },
+      { label: "Тип изделия", value: "Реторта/Муфель", important: true },
       { label: "Производство", value: "По чертежу, эскизу или образцу", important: true },
       { label: "Материал", value: "Жаропрочные стали и спецсплавы", important: true },
       { label: "Мехобработка", value: "По требованиям чертежа" },
       { label: "Контроль", value: "Размерный и визуальный контроль, дополнительные операции по ТЗ" },
     ],
     variants: [
-      { name: "Шахтные реторты", description: "Для вертикальных печей и длительной работы при высокой температуре." },
-      { name: "Трубные и барабанные реторты", description: "Для термических линий и оборудования с вращением или протяжкой." },
+      { name: "Для шахтных печей азотирования", description: "Реторты/муфели для вертикальных печей азотирования и работы в контролируемой среде.", image: retortImages.shaft },
+      { name: "Для наклонных трубных печей", description: "Исполнение для трубных печей с наклонным расположением рабочей камеры.", image: retortImages.tube },
+      { name: "Для шахтных цементационных печей", description: "Реторты/муфели для цементации в шахтных печах Ц35, Ц60, Ц75, Ц90, Ц105 и подобных.", image: retortImages.tube },
+      { name: "Для вращающейся горизонтальной печи", description: "Исполнение для горизонтальных печей с вращением изделия или рабочей камеры.", image: retortImages.drum },
+      { name: "Для эндогенераторов", description: "Реторты/муфели для оборудования подготовки защитной газовой среды.", image: retortImages.shaft },
+      { name: "Для барабанных печей", description: "Реторты/муфели для барабанных печей и термических линий.", image: retortImages.drum },
+      { name: "Для работы в вакуумной среде", description: "Исполнение под техническое задание заказчика для вакуумной среды.", image: retortImages.tube },
     ],
-    relatedProductIds: ["mufels", "furnace-plates", "loading-fixtures"],
-    calculationCta: "Отправить чертёж реторты на расчёт",
+    images: [retortImages.shaft, retortImages.tube, retortImages.drum],
+    relatedProductIds: ["furnace-plates", "loading-fixtures", "radiant-tubes"],
+    calculationCta: "Отправить чертёж реторты/муфеля на расчёт",
     featured: true,
     seo: {
-      title: "Реторты для промышленных печей по чертежам | Камский Литейный Завод",
-      description: "Изготовление жаропрочных реторт для шахтных, цементационных, трубных и барабанных печей. Производство по чертежам, подбор материала, механическая обработка.",
-    },
-  }),
-  product({
-    id: "mufels",
-    slug: "mufeli-pechey-po-chertezham",
-    categorySlug: "mufeli-pechey",
-    name: "Муфели печей",
-    productType: "furnace-equipment",
-    shortDescription: "Муфели для промышленных печей, термических участков и оборудования с защитными атмосферами.",
-    description: "Изготавливаем муфели по КД заказчика с учётом температурного режима, рабочей среды, размеров и требований к ресурсу.",
-    application: ["Термические печи", "Нагрев", "Защитные атмосферы", "Цементация"],
-    materials: ["Жаропрочные стали", "Сплавы под температуру и среду"],
-    specifications: [
-      { label: "Тип изделия", value: "Муфель", important: true },
-      { label: "Исходные данные", value: "Чертёж, эскиз или образец", important: true },
-      { label: "Температурный режим", value: "Указывается в заявке", important: true },
-      { label: "Варианты исполнения", value: "По конструкции заказчика" },
-      { label: "Поставка", value: "Единичные изделия и партии" },
-    ],
-    relatedProductIds: ["retorts", "radiant-tubes", "furnace-rollers"],
-    calculationCta: "Рассчитать муфель",
-    featured: true,
-    seo: {
-      title: "Муфели печей по чертежам | Камский Литейный Завод",
-      description: "Производство жаропрочных муфелей для промышленных печей по чертежам заказчика. Подбор стали, литьё и механическая обработка.",
+      title: "Реторты/муфели для промышленных печей по чертежам | Камский Литейный Завод",
+      description: "Изготовление жаропрочных реторт/муфелей для шахтных, цементационных, трубных, барабанных печей и вакуумной среды. Производство по чертежам, подбор материала, механическая обработка.",
     },
   }),
   product({
@@ -146,7 +144,7 @@ export const products: Product[] = [
       { label: "Параметры", value: "Диаметр, длина, фланцы и присоединения по КД" },
       { label: "Контроль", value: "Размеры, геометрия, соответствие чертежу" },
     ],
-    relatedProductIds: ["centrifugal-tubes", "mufels", "recuperators"],
+    relatedProductIds: ["centrifugal-tubes", "retorts", "recuperators"],
     calculationCta: "Отправить чертёж радиантной трубы",
     featured: true,
     seo: {

@@ -25,8 +25,7 @@ export function Header() {
             <div className="invisible absolute left-0 top-full w-[620px] translate-y-2 border border-[var(--border)] bg-[#131719] p-5 opacity-0 shadow-2xl transition group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
               <div className="grid grid-cols-3 gap-2">
                 {[
-                  ["/catalog/retorty", "Реторты"],
-                  ["/catalog/mufeli-pechey", "Муфели"],
+                  ["/catalog/retorty", "Реторты/Муфели"],
                   ["/catalog/radiantnye-truby", "Радиантные трубы"],
                   ["/catalog/centrobezhnolitye-truby", "Центробежнолитые трубы"],
                   ["/catalog/valki-i-roliki", "Валки и ролики"],

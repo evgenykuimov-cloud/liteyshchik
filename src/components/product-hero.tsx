@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -19,6 +22,23 @@ export function ProductHero({
   product: Product;
   category?: Category;
 }) {
+  const variantGallery = product.variants
+    ?.filter((variant) => variant.image)
+    .map((variant) => ({
+      name: variant.name,
+      description: variant.description,
+      image: variant.image!,
+    }));
+  const gallery = variantGallery?.length
+    ? variantGallery
+    : product.images.map((image) => ({
+        name: image.label ?? product.name,
+        description: product.shortDescription,
+        image,
+      }));
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeSlide = gallery[activeIndex] ?? gallery[0];
+  const activeImage = activeSlide.image;
   const keyRows = [
     { label: "Производство", value: "литьё по чертежам, эскизам и техническим требованиям заказчика" },
     { label: "Материалы", value: product.materials.join(", ") },
@@ -54,17 +74,47 @@ export function ProductHero({
       <div className="grid xl:grid-cols-[1.12fr_.88fr]">
         <div className="relative min-h-[620px] overflow-hidden border-b border-[var(--border)] bg-[#15191b] xl:min-h-[860px] xl:border-b-0 xl:border-r">
           <Image
-            src={product.images[0].src}
-            alt={product.images[0].alt}
+            key={activeImage.src}
+            src={activeImage.src}
+            alt={activeImage.alt}
             fill
             priority
             sizes="(max-width: 1279px) 100vw, 56vw"
-            className="object-contain object-center p-8"
+            className="object-contain object-center p-8 transition duration-300"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-black/10" />
-          <p className="absolute bottom-5 left-5 border-l-2 border-[var(--accent)] bg-black/65 px-4 py-3 text-[10px] uppercase tracking-[.14em] text-white/70 backdrop-blur-sm">
-            Изображение типовое. TODO: заменить фактической фотографией изделия
-          </p>
+          {gallery.length > 1 && (
+            <div className="absolute inset-x-5 bottom-5">
+              <div className="mb-4 max-w-xl border-l-2 border-[var(--accent)] bg-black/65 px-4 py-3 backdrop-blur-sm">
+                <p className="text-[10px] font-bold uppercase tracking-[.14em] text-[var(--accent)]">
+                  {activeSlide.name}
+                </p>
+                <p className="mt-1 text-xs leading-5 text-white/70">
+                  {activeSlide.description}
+                </p>
+              </div>
+              <div className="flex gap-3 overflow-x-auto pb-1">
+                {gallery.map((slide, index) => (
+                  <button
+                    key={slide.name}
+                    type="button"
+                    onClick={() => setActiveIndex(index)}
+                    className={`relative h-20 w-28 shrink-0 overflow-hidden border bg-black/60 transition ${
+                      activeIndex === index ? "border-[var(--accent)]" : "border-[var(--border-strong)] hover:border-[var(--accent-dark)]"
+                    }`}
+                    aria-label={`Показать ${slide.name}`}
+                  >
+                    <Image src={slide.image.src} alt="" fill sizes="112px" className="object-cover" />
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+          {gallery.length === 1 && (
+            <p className="absolute bottom-5 left-5 border-l-2 border-[var(--accent)] bg-black/65 px-4 py-3 text-[10px] uppercase tracking-[.14em] text-white/70 backdrop-blur-sm">
+              Изображение типовое. TODO: заменить фактической фотографией изделия
+            </p>
+          )}
         </div>
 
         <div className="relative flex flex-col p-6 sm:p-10 xl:p-12">
@@ -89,6 +139,30 @@ export function ProductHero({
             <p className="mt-4 text-xl text-[var(--accent)]">
               {product.shortDescription}
             </p>
+
+            {gallery.length > 1 && (
+              <div className="mt-8">
+                <p className="mb-3 text-xs font-bold uppercase tracking-[.18em] text-[var(--accent)]">
+                  Выберите вид реторты/муфеля
+                </p>
+                <div className="grid gap-2 sm:grid-cols-2">
+                  {gallery.map((slide, index) => (
+                    <button
+                      key={slide.name}
+                      type="button"
+                      onClick={() => setActiveIndex(index)}
+                      className={`border px-4 py-3 text-left text-xs font-bold uppercase leading-5 transition ${
+                        activeIndex === index
+                          ? "border-[var(--accent)] bg-[var(--accent)] text-black"
+                          : "border-[var(--border)] text-[var(--foreground-muted)] hover:border-[var(--accent-dark)] hover:text-white"
+                      }`}
+                    >
+                      {slide.name}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
 
             <div className="mt-14 flex items-center gap-3">
               <span className="grid size-11 place-items-center border border-[var(--accent)] text-[var(--accent)]">
