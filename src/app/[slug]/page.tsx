@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/container";
 import { Breadcrumbs } from "@/components/breadcrumbs";
@@ -46,13 +47,31 @@ export default async function InformationPage({ params }: { params: Promise<{ sl
               <p className="mt-3 text-sm leading-6 text-[var(--foreground-muted)]">{section.text}</p>
               <a href={yandexMapHref} target="_blank" rel="noreferrer" className="mt-4 inline-block text-sm font-bold text-[var(--accent)] underline underline-offset-4">Открыть в Яндекс Картах →</a>
             </div>
-            <iframe
-              src={yandexMapEmbedHref}
-              title={`Яндекс Карта: ${section.text}`}
-              loading="lazy"
-              allowFullScreen
-              className="h-[360px] w-full border-0 sm:h-[440px]"
-            />
+            <div className="relative">
+              <iframe
+                src={yandexMapEmbedHref}
+                title={`Яндекс Карта: ${section.text}`}
+                loading="lazy"
+                allowFullScreen
+                className="h-[360px] w-full border-0 sm:h-[440px]"
+              />
+              <div className="pointer-events-none absolute left-1/2 top-1/2 z-10 flex -translate-x-1/2 -translate-y-full flex-col items-center">
+                <div className="relative grid size-16 place-items-center rounded-full border border-white/70 bg-black/90 shadow-[0_0_22px_rgba(0,0,0,.55),0_0_16px_rgba(255,255,255,.5)]">
+                  <span className="absolute inset-1 rounded-full bg-white/20 blur-md" aria-hidden="true" />
+                  <Image
+                    src="/images/kamalit-mark.png"
+                    alt=""
+                    width={56}
+                    height={56}
+                    className="relative size-12 object-contain"
+                  />
+                </div>
+                <span className="-mt-1 size-4 rotate-45 border-b border-r border-white/70 bg-black/90 shadow-[4px_4px_10px_rgba(0,0,0,.35)]" />
+                <span className="mt-2 rounded bg-black/80 px-3 py-1 text-center text-[10px] font-bold uppercase tracking-[.08em] text-white shadow-[0_0_12px_rgba(255,255,255,.35)]">
+                  Камский Литейный Завод
+                </span>
+              </div>
+            </div>
           </section>
         ) : (
           <section key={section.title} className="min-h-64 border border-[var(--border)] bg-[var(--surface)] p-6"><span className="font-mono text-sm text-[var(--accent)]">0{index + 1}</span><h2 className="heading mt-10 text-3xl">{section.title}</h2>{section.href ? <a href={section.href} className="mt-4 block break-all text-sm leading-6 text-[var(--accent)] underline underline-offset-4">{section.text}</a> : <p className="mt-4 text-sm leading-6 text-[var(--foreground-muted)]">{section.text}</p>}{section.items && <ul className="mt-4 grid gap-2 text-sm">{section.items.map((item) => <li key={item} className="break-all border-l border-[var(--accent)] pl-3">{item}</li>)}</ul>}</section>
