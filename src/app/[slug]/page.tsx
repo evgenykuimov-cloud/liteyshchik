@@ -4,9 +4,8 @@ import { Container } from "@/components/ui/container";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { RequestQuoteForm } from "@/components/request-quote-form";
 import { DocumentsSection } from "@/components/documents-section";
-import { YandexMap } from "@/components/yandex-map";
 import { pages } from "@/data/pages";
-import { company, yandexMapHref } from "@/config/company";
+import { company, yandexMapEmbedHref, yandexMapHref } from "@/config/company";
 
 const specialSlugs = ["documents", "request-quote", "privacy", "personal-data-consent"];
 export const dynamicParams = false;
@@ -47,7 +46,13 @@ export default async function InformationPage({ params }: { params: Promise<{ sl
               <p className="mt-3 text-sm leading-6 text-[var(--foreground-muted)]">{section.text}</p>
               <a href={yandexMapHref} target="_blank" rel="noreferrer" className="mt-4 inline-block text-sm font-bold text-[var(--accent)] underline underline-offset-4">Открыть в Яндекс Картах →</a>
             </div>
-            <YandexMap address={section.text} title={company.brandName} openHref={yandexMapHref} />
+            <iframe
+              src={yandexMapEmbedHref}
+              title={`Яндекс Карта: ${section.text}`}
+              loading="lazy"
+              allowFullScreen
+              className="h-[360px] w-full border-0 sm:h-[440px]"
+            />
           </section>
         ) : (
           <section key={section.title} className="min-h-64 border border-[var(--border)] bg-[var(--surface)] p-6"><span className="font-mono text-sm text-[var(--accent)]">0{index + 1}</span><h2 className="heading mt-10 text-3xl">{section.title}</h2>{section.href ? <a href={section.href} className="mt-4 block break-all text-sm leading-6 text-[var(--accent)] underline underline-offset-4">{section.text}</a> : <p className="mt-4 text-sm leading-6 text-[var(--foreground-muted)]">{section.text}</p>}{section.items && <ul className="mt-4 grid gap-2 text-sm">{section.items.map((item) => <li key={item} className="break-all border-l border-[var(--accent)] pl-3">{item}</li>)}</ul>}</section>
