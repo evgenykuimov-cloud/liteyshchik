@@ -72,19 +72,21 @@ export function ProductHero({
   return (
     <section className="product-hero-frame overflow-hidden border border-[var(--border)] bg-[#0c0f11]">
       <div className="grid xl:grid-cols-[1.12fr_.88fr]">
-        <div className="relative min-h-[500px] overflow-hidden border-b border-[var(--border)] bg-[#15191b] sm:min-h-[620px] xl:min-h-[860px] xl:border-b-0 xl:border-r">
-          <Image
-            key={activeImage.src}
-            src={activeImage.src}
-            alt={activeImage.alt}
-            fill
-            priority
-            sizes="(max-width: 1279px) 100vw, 56vw"
-            className="object-contain object-[center_18%] p-3 transition duration-300 sm:p-8 xl:p-10"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-black/10" />
+        <div className="relative self-start overflow-hidden border-b border-[var(--border)] bg-[#15191b] p-4 sm:p-6 xl:border-b-0 xl:border-r">
+          <div className="relative aspect-[16/9] overflow-hidden bg-black">
+            <Image
+              key={activeImage.src}
+              src={activeImage.src}
+              alt={activeImage.alt}
+              fill
+              priority
+              sizes="(max-width: 1279px) 100vw, 56vw"
+              className="object-cover object-center transition duration-300"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-black/10" />
+          </div>
           {gallery.length > 1 && (
-            <div className="absolute inset-x-5 bottom-5">
+            <div className="relative z-10 mt-4">
               <div className="mb-4 max-w-xl border-l-2 border-[var(--accent)] bg-black/65 px-4 py-3 backdrop-blur-sm">
                 <p className="text-[10px] font-bold uppercase tracking-[.14em] text-[var(--accent)]">
                   {activeSlide.name}
@@ -111,7 +113,7 @@ export function ProductHero({
             </div>
           )}
           {gallery.length === 1 && (
-            <p className="absolute bottom-5 left-5 border-l-2 border-[var(--accent)] bg-black/65 px-4 py-3 text-[10px] uppercase tracking-[.14em] text-white/70 backdrop-blur-sm">
+            <p className="relative z-10 mt-4 border-l-2 border-[var(--accent)] bg-black/65 px-4 py-3 text-[10px] uppercase tracking-[.14em] text-white/70 backdrop-blur-sm">
               Изображение типовое. TODO: заменить фактической фотографией изделия
             </p>
           )}
