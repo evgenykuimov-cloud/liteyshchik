@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -37,8 +37,17 @@ export function ProductHero({
         image,
       }));
   const [activeIndex, setActiveIndex] = useState(0);
+  const thumbnailRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const activeSlide = gallery[activeIndex] ?? gallery[0];
   const activeImage = activeSlide.image;
+
+  useEffect(() => {
+    thumbnailRefs.current[activeIndex]?.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
+    });
+  }, [activeIndex]);
   const keyRows = [
     { label: "Производство", value: "литьё по чертежам, эскизам и техническим требованиям заказчика" },
     { label: "Материалы", value: product.materials.join(", ") },
@@ -99,6 +108,9 @@ export function ProductHero({
                 {gallery.map((slide, index) => (
                   <button
                     key={slide.name}
+                    ref={(node) => {
+                      thumbnailRefs.current[index] = node;
+                    }}
                     type="button"
                     onClick={() => setActiveIndex(index)}
                     className={`relative h-20 w-28 shrink-0 overflow-hidden border bg-black/60 transition ${
